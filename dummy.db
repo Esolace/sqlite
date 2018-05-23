@@ -1,0 +1,48 @@
+Last login: Wed May 23 11:13:51 on ttys000
+Solaces-MacBook:~ solace$ sqlite3 dummy.db
+SQLite version 3.19.3 2017-06-27 16:48:08
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE users (
+   ...>   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...>   first_name VARCHAR(64) NOT NULL,
+   ...>   last_name VARCHAR(64) NOT NULL,
+   ...>   email VARCHAR(128) UNIQUE NOT NULL,
+   ...>   created_at DATETIME NOT NULL,
+   ...>   updated_at DATETIME NOT NULL
+   ...> );
+sqlite> SQLite version 3.8.10.2 2015-05-20 18:17:19
+   ...> Enter ".help" for usage hints.
+   ...> sqlite> CREATE TABLE users (
+   ...>    ...> id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...>    ...> first_name VARCHAR(64) NOT NULL,
+   ...>    ...> last_name VARCHAR(64) NOT NULL,
+   ...>    ...> email VARCHAR(128) UNIQUE NOT NULL,
+   ...>    ...> created_at DATETIME NOT NULL,
+   ...>    ...> updated_at DATETIME NOT NULL
+   ...>    ...> );
+Error: near "SQLite": syntax error
+sqlite> .schema
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name VARCHAR(64) NOT NULL,
+  last_name VARCHAR(64) NOT NULL,
+  email VARCHAR(128) UNIQUE NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
+);
+CREATE TABLE sqlite_sequence(name,seq);
+sqlite> INSERT INTO users
+   ...> (first_name, last_name, email, created_at, updated_at)
+   ...> VALUES
+   ...> ('Joshua', 'Teng', 'jedicoder@example.com', DATETIME('now'), DATETIME('now'));
+sqlite> select * from users;
+1|Joshua|Teng|jedicoder@example.com|2018-05-23 03:37:46|2018-05-23 03:37:46
+sqlite> ALTER TABLE users ADD COLUMN nickname TEXT;
+sqlite> UPDATE users SET nickname = "Pookie butt";
+sqlite> select * from users;
+1|Joshua|Teng|jedicoder@example.com|2018-05-23 03:37:46|2018-05-23 03:37:46|Pookie butt
+sqlite> UPDATE users SET nickname = "Ninja Coder", name = "Josh Teng";
+Error: no such column: name
+sqlite> UPDATE users SET nickname = "Ninja Coder", first_name = "Josh";
+sqlite> select * from users;                                1|Josh|Teng|jedicoder@example.com|2018-05-23 03:37:46|2018-05-23 03:37:46|Ninja Coder
+sqlite> 
